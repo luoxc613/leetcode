@@ -1,0 +1,54 @@
+public class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result= new ArrayList<> ();
+        List<Integer> s= new ArrayList<> ();
+        List<Integer> t= new ArrayList<> ();
+        Arrays.sort(nums);
+        s.add(nums[0]);
+        for(int i=1;i<nums.length;i++)
+            {
+                if(nums[i]==nums[i-1])
+                    continue;
+                else
+                    s.add(nums[i]);
+            }
+        sum4(s,t,target,4,result);
+        return result;
+    }
+    public void sum4(List<Integer> s,List<Integer> t, int target, int n, List<List<Integer>> result)
+    {
+        if(n==1)
+        {
+            if(s.contains(target))
+                {
+                    t.add(target);
+                    result.add(t);
+                    return;
+                }
+            else
+                {
+                    t.add(0);
+                    return;
+                }
+        }
+        else
+            {
+                for(int i=0;i<s.size();i++)
+                    {
+                        int q=s.get(i);
+                        t.add(q);
+                        target=target-q;
+                        s.remove(i);
+                        s.add(i,q);
+                        sum4(s,t,target,n-1,result);
+                        if(n==2)
+                            t.remove(t.size()-1);
+                        t.remove(t.indexOf(q));
+                        target=target+q;
+                    }
+                
+            }
+            return;
+        
+    }
+}
