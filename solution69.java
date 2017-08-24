@@ -1,0 +1,19 @@
+class Solution {
+    public int mySqrt(int x) {
+        if(x==0)
+            return 0;
+        int s=1,e=Integer.MAX_VALUE;
+        while(s<e)
+        {
+            int mid=s+(e-s)/2;
+            if(mid>x/mid)
+                e=mid-1;
+            else
+                if((mid+1)>x/(mid+1))
+                    return mid;
+            else
+                s=mid+1;
+        }
+        return s;
+    }
+}
